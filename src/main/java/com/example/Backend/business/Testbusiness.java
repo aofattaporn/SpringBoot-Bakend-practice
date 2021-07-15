@@ -1,7 +1,9 @@
 package com.example.Backend.business;
 
+import com.example.Backend.exception.BaseException;
+import com.example.Backend.exception.UserException;
 import com.example.Backend.model.MregisterRequest;
-import org.springframework.http.ResponseEntity;
+
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -9,17 +11,16 @@ import java.util.Objects;
 
 @Service
 public class Testbusiness {
-    public String register(MregisterRequest request) throws IOException {
+    public String register(MregisterRequest request) throws BaseException {
+        // valid null request
         if (request == null) {
-            throw new IOException("null.request");
+            throw UserException.requestNull();
         }
         // validate email
         else if (Objects.isNull(request.getEmail())){
-            throw  new IOException("null.email");
+            throw  UserException.emailNull();
         }
-        else if (Objects.isNull(request.getPassword())){
-            throw  new IOException("null.password eiei");
-        }
+
         // validate...
         return  "Hello world";
     }
