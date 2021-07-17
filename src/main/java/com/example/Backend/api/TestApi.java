@@ -7,14 +7,11 @@ import com.example.Backend.model.TestResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequestMapping("/test")
 public class TestApi {
-
-//     HETHOD1 => field Injection
-//    @Autowired
-//    private Testbusiness business;
 
     // HEADHOT2 => Constructor Injection
     private final Testbusiness business;
@@ -24,9 +21,9 @@ public class TestApi {
         this.business = business;
     }
 
-    @GetMapping
     // when you want to get json,
     // you are going to return by object
+    @GetMapping
     public TestResponse Test() {
         TestResponse response = new TestResponse();
         response.setFood("Aof");
@@ -35,6 +32,7 @@ public class TestApi {
         return response;
     }
 
+    // get mapping from adding url
     @GetMapping
     @RequestMapping("/2")
     public TestResponse test2() {
@@ -45,11 +43,19 @@ public class TestApi {
         return response;
     }
 
+    // post method for registration system
     @PostMapping
     @RequestMapping("/register")
     public ResponseEntity<String> register(@RequestBody MregisterRequest request) throws BaseException {
         String response = business.register(request);
         return ResponseEntity.ok(response);
 
+    }
+
+//     test-upload Api
+    @PostMapping
+    public ResponseEntity<String> uploadProfilePicture(@RequestPart MultipartFile file) throws BaseException {
+        String response = business.uploadProfilePicture(file);
+        return ResponseEntity.ok(response);
     }
 }

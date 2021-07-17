@@ -20,6 +20,7 @@ public class ErrorAdviser {
         return new ResponseEntity<ErrorRespond>(response, HttpStatus.EXPECTATION_FAILED);
     }
 
+    // Inner class variable
     @Data
     public static class ErrorRespond {
 

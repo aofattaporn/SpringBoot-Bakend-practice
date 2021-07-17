@@ -18,9 +18,14 @@ public class ProductApi {
 
     @GetMapping("/{id}")
     public ResponseEntity<String> getProductID(@PathVariable("id") String id) {
-        String respond = null;
-        respond = business.GetProductId(id);
+        String respond = business.GetProductId(id);
         return ResponseEntity.ok(respond);
+    }
+
+    @GetMapping
+    public ResponseEntity<String> testapi() {
+        String response = business.GetProductId("123");
+        return ResponseEntity.ok(response);
     }
 
 }
