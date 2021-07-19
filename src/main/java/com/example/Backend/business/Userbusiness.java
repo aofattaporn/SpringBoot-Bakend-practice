@@ -1,32 +1,30 @@
 package com.example.Backend.business;
 
+import com.example.Backend.entity.User;
 import com.example.Backend.exception.BaseException;
 import com.example.Backend.exception.FileException;
-import com.example.Backend.exception.UserException;
 import com.example.Backend.model.MregisterRequest;
+import com.example.Backend.service.UserService;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
 
 @Service
-public class Testbusiness {
+public class Userbusiness {
 
-    public String register(MregisterRequest request) throws BaseException {
-        // valid null request
-        if (request == null) {
-            throw UserException.requestNull();
-        }
-        // validate email
-        else if (Objects.isNull(request.getEmail())) {
-            throw UserException.emailNull();
-        }
+    // Injection UserService
+    private final UserService userService;
+    public Userbusiness(UserService userService) {
+        this.userService = userService;
+    }
 
-        // validate...
-        return "Hello world";
+    public User register(MregisterRequest request) throws BaseException {
+        User user = userService.create(request.getEmail(), request.getPassword(), request.getName());
+
+        return user;
     }
 
     public String uploadProfilePicture(MultipartFile file) throws BaseException {
