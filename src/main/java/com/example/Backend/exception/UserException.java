@@ -33,4 +33,14 @@ public class UserException extends BaseException{
         return new UserException("create.nmae.null");
     }
 
+    // login exception
+
+    public static UserException loginFailEmailNotFound() {
+        return new UserException("login.fail");
+    }
+
+    public static UserException loginFailPasswordIncorrect() {
+        return new UserException("login.fail");
+    }
+
 }

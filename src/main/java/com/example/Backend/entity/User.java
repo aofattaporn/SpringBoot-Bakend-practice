@@ -14,10 +14,15 @@ public class User extends BaseEntity {
     @Column(nullable = false, unique = true, length = 60)
     private String email;
 
+//    @JsonIgnore
     @Column(nullable = false, length = 120)
     private String password;
 
     @Column(nullable = false, length = 120)
     private String name;
+
+    private String civilId;
+
+
 
 }
